@@ -1,0 +1,110 @@
+const path = require('path') //built in core moduel
+const express = require('express')
+//node provides
+//console.log(__dirname); //directory of current script that lives in C:\Users\matt8\Desktop\project\web-server\src
+//console.log(__filename); //complete path C:\Users\matt8\Desktop\project\web-server\src\app.js
+
+//console.log(__dirname)
+//console.log(path.join(__dirname, '..')); //C:\Users\matt8\Desktop\project\web-server
+//console.log(path.join(__dirname, '..','..')); //C:\Users\matt8\Desktop\project
+//console.log(path.join(__dirname,'../public'));
+//core node module 
+
+const app = express()
+const publicDirectoryPath = path.join(__dirname,'../public');
+
+
+app.set('view engine','hbs')
+
+app.use(express.static(publicDirectoryPath))
+
+app.get('',(req,res)=>{
+    res.render('index',{
+        title : 'Weather',
+        name : 'Matt'
+    })
+})
+app.get('/about',(req,res)=>{
+    res.render('about')
+})
+
+app.listen(3000,()=>{
+    console.log('server is up on port 3000');
+});
+
+
+
+
+//Webserver에서 index의 의미가 있으므로 root이여도 실행안됨/
+// app.get('',(req,res)=>{
+//     res.send('<h1>Weather</h1>');
+// })
+
+/*
+app.get('/help',(req,res)=>{
+    res.send([{ //Express is gonna detect we've provided an object it is automatically going to stringy the JSON for us
+        name : 'Matt',
+        age : 28
+    },{
+        name : 'Kevin',
+        age : 20
+    }])
+})
+
+
+app.get('/about',(req,res)=>{
+    res.send('<h1>Welcome to About Page</h1>');
+
+})
+*/
+
+// app.get('/weather',(req,res)=>{
+//     res.send({
+//         location : "Seoul", 
+//         foreCast : "0 % of Rain"
+//     });
+// })
+
+
+
+//root route 
+//app.com
+//app.com/help
+//app.com/about
+/*
+-==app.get에 대한 설명---
+The first is the route so the partial you are all that would be nothing for this first example forward
+
+slash help for the second or forward slash about for the third and it also takes in a function.
+
+Now the function is where we describe what we want to do when someone visits this particular route.
+
+So in this case when someone visits the home page this function would describe what to send back to
+
+them.
+
+----(req,res)에 대한 설명 --
+
+Now this function gets called with two very important arguments.
+
+The first is an object containing information about the incoming request to the server.
+
+This is commonly called R E Q which is short for request.
+
+You'll see this used throughout the documentation.
+
+The other argument is the response.
+
+So this contains a bunch of methods allowing us to customize what we're going to send back to the requester.
+
+This is commonly called R E S which is short for response.
+*/
+
+//서버 시작 하기  [app.listen()]
+/*
+If we were to run the application we would never be able to view it in the browser to start the server
+
+up.
+
+We have to use one more method on app which will only ever use a single time in our application that
+*/
