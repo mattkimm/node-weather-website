@@ -8,6 +8,9 @@ const forecast = require('./utils/forecast.js')
 
 const app = express()
 
+//only run on heroku 
+//if environ port exist than use if not use 3000
+const port = process.env.PORT || 3000
 
 //앞서 말했듯이 express를 이용한 views폴더는 꼭 views폴더가 root폴던 안에 위치해있어야하는데
 // 이렇게 해서 Custom View folder를 재정의 할 수 있다.
@@ -126,9 +129,9 @@ app.get('*',(req, res)=>{ // Route가 없을 시 404 이 발생하는데 * 모�
 })
 
 
-app.listen(3000, () => {
+app.listen(port, () => {
 
-    console.log('Server is up on port 3000.')
+    console.log('Server is up on port ' + port);
 
 })
 
